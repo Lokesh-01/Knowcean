@@ -1,0 +1,31 @@
+{% extends "encyclopedia/layout.html"%}
+{% block title%}
+    New entry
+{% endblock%}
+{% block body%}
+    <form action="{% url 'newentry'%}" method="POST">
+        {% csrf_token%}
+        <h2 class="ne_h2">
+            Create new entry here.
+        </h2>
+        <div class="container">
+            <div class="alert alert-danger" role="alert">
+                Don't forget to use markdown syntax!
+            </div>
+        </div>
+        <label for="e">Title :</label>
+        <input name="entry_title" type="text" placeholder="Enter title of the entry here" id="e"><br>
+        <div>
+            <label for="ec" >Content :-</label>
+            </div>
+        <textarea name="entry_content" placeholder="Enter content for the respective entry here." id="ec" rows="50" cols="20" ></textarea>
+        <div id="nf_form_btn">
+            <input type ="submit" name="create">
+        </div>
+    </form> 
+    {% if messages %}
+        {% for message in messages%}
+        <p class="{{messages.tags}}">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
